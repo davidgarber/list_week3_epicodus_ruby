@@ -5,7 +5,15 @@ class List
   define_method(:initialize) do |name, type|
     @name = name
     @type = type
-    @id = lists.length().+(1)
+    @id = @@lists.length().+(1)
+  end
+
+  define_method(:name) do
+    @name
+end
+
+  define_method(:type) do
+    @type
   end
 
   define_singleton_method(:clear) do
@@ -16,7 +24,8 @@ class List
     @@lists
   end
 
-    define_method(:name) do
-    @name
+  define_method(:id) do
+    @id
   end
+
 end
