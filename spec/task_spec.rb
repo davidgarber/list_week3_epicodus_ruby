@@ -17,4 +17,12 @@ describe(Task) do
       expect(Task.all()).to(eq([]))
     end
   end
+
+  describe('#description') do
+    it('returns the description') do
+      test_task = Task.new({description: 'walk the dog'})
+      expect(test_task.description()).to(eq('walk the dog'))
+    end
+  end
+
 end
