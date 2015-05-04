@@ -34,6 +34,14 @@ describe(List) do
     end
   end
 
+  describe("#save") do
+    it("saves the list") do
+      test_list = List.new("Monday", "home")
+      test_list.save()
+      expect(List.all()).to(eq([test_list]))
+    end
+  end
+
   describe('.all') do
     it('is empty at first') do
       expect(List.all()).to(eq([]))
