@@ -27,6 +27,13 @@ describe(List) do
     end
   end
 
+  describe('.clear') do
+    it ('empties out all of the saved lists') do
+      test_list = List.new('Monday', 'home')
+      expect(List.all()).to(eq([]))
+    end
+  end
+
   describe('.all') do
     it('is empty at first') do
       expect(List.all()).to(eq([]))
