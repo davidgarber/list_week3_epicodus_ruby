@@ -19,4 +19,9 @@ describe(List) do
       expect(test_list.type()).to(eq("home"))
     end
   end
+  describe('.all') do
+    it('is empty at first') do
+      expect(List.all()).to(eq([]))
+    end
+  end
 end
