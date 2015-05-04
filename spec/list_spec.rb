@@ -47,4 +47,14 @@ describe(List) do
       expect(List.all()).to(eq([]))
     end
   end
+
+  describe('.find') do
+    it("returns a name by its id number") do
+      test_list = List.new('Monday', 'home')
+      test_list.save()
+      test_list2 = List.new('Tuesday', 'work')
+      test_list2.save()
+      expect(List.find(test_list.id())).to(eq(test_list))
+    end
+  end
 end
