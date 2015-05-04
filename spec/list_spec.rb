@@ -19,6 +19,14 @@ describe(List) do
       expect(test_list.type()).to(eq("home"))
     end
   end
+
+  describe('#id') do
+    it('returns the value of id') do
+      test_list = List.new('Monday', 'home')
+      expect(test_list.id()).to(eq(1))
+    end
+  end
+
   describe('.all') do
     it('is empty at first') do
       expect(List.all()).to(eq([]))
