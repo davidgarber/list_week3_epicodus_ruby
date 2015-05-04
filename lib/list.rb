@@ -1,46 +1,30 @@
 class List
 
-  @@lists = []
+  attr_reader(:name, :id)
 
-  define_method(:initialize) do |name, type|
-    @name = name
-    @type = type
-    @id = @@lists.length().+(1)
-  end
-
-  define_method(:name) do
-    @name
-end
-
-  define_method(:type) do
-    @type
+  define_method(:initialize) do |attributes|
+    @name = attributes.fetch(:name)
+    @id = attributes.fetch(:id)
   end
 
   define_method(:save) do
-    @@lists.push(self)
-  end
-
-  define_singleton_method(:clear) do
-    @@lists = []
+    result = DB.exec("INSERT INTO lists (name) VALUES ('#{@name}') RETURNING id;")
+    @id = result.first().fetch("id").to_i()
   end
 
   define_singleton_method(:all) do
-    @@lists
-  end
-
-  define_singleton_method(:find) do |id|
-    found_list = nil
-    @@lists.each() do |list|
-      if list.id().eql?(id.to_i())
-        found_list = list
-      end
+    returned_lists = DB.exec("SELECT * FROM lists;")
+    lists = []
+    returned_lists.each() do |list|
+      name=list.fetch("name")
+      id=list.fetch("id").to_i()
+      lists.push(List.new({:name => name, :id => id}))
     end
-    found_list
+    lists
   end
 
-
-  define_method(:id) do
-    @id
+  define_method(:==) do |another_list|
+    self.name().==(another_list.name()).&(self.id().==(another_list.id()))
   end
 
 end
